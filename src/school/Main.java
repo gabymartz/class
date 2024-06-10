@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Main {
     private static ArrayList<Student> students = new ArrayList<>();
     private static ArrayList<Teacher> teachers = new ArrayList<>();
+    private static ArrayList<Subject> subjects = new ArrayList<>();
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -15,7 +16,9 @@ public class Main {
             System.out.println("2. Crear Profesor");
             System.out.println("3. Imprimir Estudiante(s)");
             System.out.println("4. Imprimir Profesor(es)");
-            System.out.println("5. Salir");
+            System.out.println("5. Crear Asignatura");
+            System.out.println("6. Imprimir Asignatura(s)");
+            System.out.println("7. Salir");
 
             System.out.print("Seleccione una opción: ");
             String option = scanner.nextLine();
@@ -34,6 +37,12 @@ public class Main {
                     printTeachers();
                     break;
                 case "5":
+                    createSubject();
+                    break;
+                case "6":
+                    printSubjects();
+                    break;
+                case "7":
                     System.out.println("Saliendo...");
                     return;
                 default:
@@ -74,6 +83,16 @@ public class Main {
         System.out.println("Profesor creado exitosamente.");
     }
 
+    private static void createSubject() {
+        System.out.print("Ingrese el nombre de la asignatura: ");
+        String name = scanner.nextLine();
+        System.out.print("Ingrese el código de la asignatura: ");
+        String subjectCode = scanner.nextLine();
+        Subject subject = new Subject(name, null, new ArrayList<>());
+        subjects.add(subject);
+        System.out.println("Asignatura creada exitosamente.");
+    }
+
     private static void printStudents() {
         if (students.isEmpty()) {
             System.out.println("No hay estudiantes registrados.");
@@ -95,5 +114,15 @@ public class Main {
             }
         }
     }
-}
 
+    private static void printSubjects() {
+        if (subjects.isEmpty()) {
+            System.out.println("No hay asignaturas registradas.");
+        } else {
+            System.out.println("\nLista de Asignaturas:");
+            for (Subject subject : subjects) {
+                System.out.println("Nombre: " + subject.getName() + ", Código: " + subject.getSubjectCode());
+            }
+        }
+    }
+}
